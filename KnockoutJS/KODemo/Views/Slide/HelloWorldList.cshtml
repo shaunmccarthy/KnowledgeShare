@@ -13,23 +13,26 @@
         <thead><tr>
             <th>Attendee</th><th>Language</th><th></th>
         </tr></thead>
-        <!-- NB: the foreach -->
+        <!-- TODO: make a row per user in the attendees array -->
         <tbody data-bind="foreach: attendees">
             <tr>
                 <td><input data-bind="value: name" /></td>
                 <!-- NB: $root -->
                 <td><select data-bind="options: $root.availableLanguages, value: language, optionsText: 'language'"></select></td>
-                <td><a class="remove" href="#" data-bind="click: $root.removeAttendee">[x]</a></td>
+                <!-- TODO: Allow the removal of users -->
+                <td><a class="remove" href="#">[x]</a></td>
             </tr>    
         </tbody>
     </table>
 
-    <button data-bind="click: addAttendee">Add another attendee</button>
+    <!-- TODO: all the addition of users -->
+    <button>Add another attendee</button>
 
     </div>
 
     <div class="rightCol">
-    <ul data-bind="foreach: attendees">
+    <!-- TODO: Greet the attendees --> 
+    <ul>
         <!-- NB: hide empty items -->
         <li data-bind="visible: name() != ''"><strong data-bind="text: translatedHello">Hello</strong></li>
     </ul>

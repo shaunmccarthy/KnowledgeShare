@@ -5,12 +5,15 @@
 <h2>Hello World</h2>
 
 <p>What's your name?</p>
-<p>First Name: <input data-bind="value: firstname" /></p>
-<p>Last Name: <input data-bind="value: lastname, valueUpdate: 'afterkeydown'" /></p>
+<!-- TODO - make these input fields that update the view model -->
+<p>First Name: <input /></p>
+<!-- TODO - also, make them change as teh user types -->
+<p>Last Name: <input /></p>
 
-<!-- NB: fullname toggles this div -->
-<div class="content" data-bind="visible: fullname() != ''">
-<p>Hello <strong data-bind="text: fullname"></strong></p>
+<!-- TODO: only show this element when the user has entered a fullname -->
+<div class="content">
+<!-- TODO: Show the users full name -->
+<p>Hello <strong ></strong></p>
 </div>
 
 <script>
@@ -22,6 +25,9 @@
         // It has properties (note the ko.observable)
         self.firstname = ko.observable("");
         self.lastname = ko.observable("");
+
+        // This is a computed property, derived from observables - will be reevaluated each time
+        // an observable is updated
         self.fullname = ko.computed(function () {
             // NB: function calls to observables!
             if (self.firstname() == undefined || self.firstname() == "")
