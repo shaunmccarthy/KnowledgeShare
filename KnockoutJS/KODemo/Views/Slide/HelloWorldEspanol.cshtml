@@ -1,0 +1,45 @@
+﻿@{
+    ViewBag.Title = "HelloWorldEspanol";
+}
+
+<h2>Hola Mundo</h2>
+
+<select  data-bind="options: availableLanguages, value: language, optionsText: 'language'"></select>
+<p><strong data-bind="text: question"></strong><input data-bind="value: name" /></p>
+
+<div class="content" data-bind="visible: name() != ''">
+<p><strong data-bind="text: translatedHello">Hello</strong></p>
+</div>
+
+<script>
+    function AppViewModel() {
+
+        var self = this;
+
+        // NB: A list of lanugages 
+        self.availableLanguages = [
+            { language: "Australian", question: "Who's this bloke?", greeting: "G'day ", postgreeting: ", time to throw some chook on the barbie!" },
+            { language: "English (American)", question: "What's your name?", greeting: "Yo ", postgreeting: ", whazzup?" },
+            { language: "English (The Queen's English)", question: "Your name, sir?", greeting: "Fancy a spot of tea ", postgreeting: "?" },
+            { language: "Español", question: "¿Cómo te llamas?", greeting: "Ola ", postgreeting: ", ¿qué tal?" },
+            { language: "Kiwi", question: "Hey bro, what's your name?", greeting: "How's it going ", postgreeting: "?" }
+        ];
+
+        // It has properties (note the ko.observable)
+        self.name = ko.observable("");
+
+        // NB: we have to pass in the language as an _object_ not the index, if we want it selected
+        self.language = ko.observable(self.availableLanguages[3]);
+
+        self.question = ko.computed(function () {
+            return self.language().question;
+        });
+
+        self.translatedHello = ko.computed(function () {
+            return self.language().greeting + self.name() + self.language().postgreeting;
+        });
+    }
+
+    // Activates knockout.js
+    ko.applyBindings(new AppViewModel());
+</script>

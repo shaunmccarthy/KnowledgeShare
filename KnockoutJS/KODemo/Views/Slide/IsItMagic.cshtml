@@ -1,0 +1,27 @@
+﻿@{
+    ViewBag.Title = "IsItMagic";
+}
+
+<h2>Is It Magic?</h2>
+
+<div class="content">
+<p>It would be great if we could <strong data-bind="text: problem">______</strong>...<br />
+<strong data-bind="text: person">todo</strong> thinks so!</p>
+</div>
+
+<p>What would be great: <input data-bind="value: problem" /></p>
+<p>Who thinks it would be great? <input data-bind="value: person" /></p>
+
+<script>
+    // Very simple view model
+    function AppViewModel() {
+
+        // It has properties (note the ko.observable)
+        this.problem = ko.observable("__________");
+        this.person = ko.observable("[Someone]");
+    }
+
+    // Activates knockout.js
+    ko.applyBindings(new AppViewModel());
+</script>
+

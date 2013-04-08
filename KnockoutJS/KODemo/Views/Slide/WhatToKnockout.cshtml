@@ -1,0 +1,30 @@
+﻿@{
+    ViewBag.Title = "WhatToKnockout";
+}
+
+<h2>What To Knockout</h2>
+
+<div class="content">
+    <p>Wouldn't it be great if we didn't have to deal with <strong data-bind="text: problem">______</strong>?</p>
+    <p><strong data-bind="text: person">[someone]</strong> thinks so!</p>
+</div>
+<input type="button" data-bind="click: populate" value="Populate!" />
+
+<script>
+    // Very simple view model
+    function AppViewModel() {
+
+        // It has properties (note the ko.observable)
+        this.problem = ko.observable("______");
+        this.person = ko.observable("[someone]");
+
+        this.populate = function () {
+            this.problem("writing code to bind objects to elements"); // Note, I am not having to do a $(element).text("balh") here which would couple my code to the view
+            this.person("Shaun");
+        };
+    }
+
+    // Activates knockout.js
+    ko.applyBindings(new AppViewModel());
+</script>
+

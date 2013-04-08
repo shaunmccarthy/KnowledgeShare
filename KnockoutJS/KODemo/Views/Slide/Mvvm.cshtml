@@ -1,0 +1,32 @@
+﻿@{
+    ViewBag.Title = "Mvvm";
+}
+
+<h2>What is MVVM</h2>
+
+<ul>
+    <li><strong>Model View ViewModel</strong>
+        <ul>
+            <li><strong>Model</strong> - the data</li>
+            <li><strong>ViewModel</strong> - code representation of the data and all UI operations. No knowledge of HTML/javascript</li>
+            <li><strong>View</strong> - displays information / sends comments to ViewModel</li>
+        </ul>
+    </li>
+    <li><strong>Differences between MVC and MVVM</strong>
+        <ul>
+            <li>You only have one <b>ViewModel</b> per view</li>
+            <li>MVC is great for round tripping and separating out business logic</li>
+            <li>MVVM is great for data binding and more about the UI</li>
+        </ul>
+    </li>
+    <li><strong>Observables</strong>
+        <ul>
+            <li>Making a variable observable will tell Knockout to update the view automagically when values change</li>
+            <li><strong>Declaration</strong> propertyName: ko.observable('propertyValue')</li>
+            <li><strong>Read</strong> propertyName() NOT propertyName</li>
+            <li><strong>Write</strong> propertyName('newvalue') NOT propertyName = 'newvalue'</li>
+            <li>Chaining is supported, e.g. myViewModel.name('John').age(27)</li>
+            <li>Works with arrays also - more on this later...</li>
+        </ul>
+    </li>
+</ul>

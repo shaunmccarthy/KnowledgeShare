@@ -1,0 +1,39 @@
+﻿@{
+    ViewBag.Title = "HelloWorld";
+}
+
+<h2>Hello World</h2>
+
+<p>What's your name?</p>
+<p>First Name: <input data-bind="value: firstname" /></p>
+<p>Last Name: <input data-bind="value: lastname, valueUpdate: 'afterkeydown'" /></p>
+
+<!-- NB: fullname toggles this div -->
+<div class="content" data-bind="visible: fullname() != ''">
+<p>Hello <strong data-bind="text: fullname"></strong></p>
+</div>
+
+<script>
+    // Very simple view model
+    function AppViewModel() {
+
+        var self = this;
+
+        // It has properties (note the ko.observable)
+        self.firstname = ko.observable("");
+        self.lastname = ko.observable("");
+        self.fullname = ko.computed(function () {
+            // NB: function calls to observables!
+            if (self.firstname() == undefined || self.firstname() == "")
+                return "";
+
+            if (self.lastname() == undefined || self.lastname() == "")
+                return self.firstname();
+
+            return self.firstname() + " " + self.lastname();
+        });
+    }
+
+    // Activates knockout.js
+    ko.applyBindings(new AppViewModel());
+</script>

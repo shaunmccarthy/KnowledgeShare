@@ -1,0 +1,85 @@
+﻿@{
+    ViewBag.Title = "Simple";
+}
+
+<h2>But what about me?</h2>
+
+<!-- nb: Container, not clear:both as per http://www.quirksmode.org/css/clearing.html -->
+<div class="container">
+
+    <div class="leftCol">
+
+    <table class="attendees">
+        <thead><tr>
+            <th>Attendee</th><th>Language</th><th></th>
+        </tr></thead>
+        <!-- NB: the foreach -->
+        <tbody data-bind="foreach: attendees">
+            <tr>
+                <td><input data-bind="value: name" /></td>
+                <!-- NB: $root -->
+                <td><select data-bind="options: $root.availableLanguages, value: language, optionsText: 'language'"></select></td>
+                <td><a class="remove" href="#" data-bind="click: $root.removeAttendee">[x]</a></td>
+            </tr>    
+        </tbody>
+    </table>
+
+    <button data-bind="click: addAttendee">Add another attendee</button>
+
+    </div>
+
+    <div class="rightCol">
+    <ul data-bind="foreach: attendees">
+        <!-- NB: hide empty items -->
+        <li data-bind="visible: name() != ''"><strong data-bind="text: translatedHello">Hello</strong></li>
+    </ul>
+    </div>
+</div>
+
+
+<script>
+    // The attendee Model
+    function Attendee(name, language) {
+        var self = this;
+
+        self.name = ko.observable(name);
+        self.language = ko.observable(language);
+
+        self.translatedHello = ko.computed(function () {
+            return self.language().greeting + self.name() + self.language().postgreeting;
+        });
+    }
+
+    // Very simple view model
+    function AttendeeViewModel() {
+
+        var self = this;
+
+        self.availableLanguages = [
+            { language: "Australian", question: "Who's this bloke?", greeting: "G'day ", postgreeting: ", time to throw some chook on the barbie!" },
+            { language: "English (American)", question: "What's your name?", greeting: "Yo ", postgreeting: ", whazzup?" },
+            { language: "English (The Queen's English)", question: "Your name, sir?", greeting: "Fancy a spot of tea ", postgreeting: "?" },
+            { language: "Español", question: "¿Cómo te llamas?", greeting: "Ola ", postgreeting: ", ¿qué tal?" },
+            { language: "Kiwi", question: "Hey bro, what's your name?", greeting: "How's it going ", postgreeting: "?" }
+        ];
+
+
+        // NB: Observable array
+        self.attendees = ko.observableArray([
+            new Attendee("Shaun", self.availableLanguages[2]),
+            new Attendee("Miles", self.availableLanguages[4]),
+            new Attendee("Daniel", self.availableLanguages[1]),
+            new Attendee("Sam", self.availableLanguages[0])
+        ]);
+
+        // Operations
+        self.addAttendee = function () {
+            self.attendees.push(new Attendee("", self.availableLanguages[0]));
+        }
+
+        self.removeAttendee = function (attendee) { self.attendees.remove(attendee) }
+    }
+
+    // Activates knockout.js
+    ko.applyBindings(new AttendeeViewModel());
+</script>

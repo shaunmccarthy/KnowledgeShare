@@ -1,0 +1,83 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Member Admin</h2>
+
+<!-- NB: Sammy - http://sammyjs.org/ -->
+@Scripts.Render("~/Scripts/sammy.js")
+
+<!-- Types of users-->
+<ul class="types" data-bind="foreach: types">
+    <li data-bind="text: $data, 
+                   css: { selected: $data == $root.chosenTypeId() },
+                   click: $root.goToType"></li>
+</ul>
+<!-- User List -->
+<table class="users" data-bind="visible: chosenTypeData() != undefined">
+    <thead><tr><th>Username</th><th>Company</th><th>Status</th></tr></thead>
+    <tbody data-bind="foreach: chosenTypeData">
+        <tr data-bind="click: $root.goToUser">
+            <td data-bind="text: username"></td>
+            <td data-bind="text: masterCompany"></td>
+            <td data-bind="text: status"></td>
+        </tr>     
+    </tbody>
+</table>
+<!-- User -->
+<!-- NB: note the with command here -->
+<div class="viewUser" data-bind="with: chosenUserData">
+    <div class="userInfo">
+        <h1 data-bind="text: username"></h1>
+        <p>
+        <label>Master Company</label>: <span data-bind="text: masterCompany"></span><br />
+        <label>Status</label>: <span data-bind="text: status"></span><br />
+        <label>Sales Person</label>: <span data-bind="text: assignedSalesPerson"></span><br />
+        <label>Comment</label>: <span data-bind="text: comment"></span><br />
+        </p>
+    </div>
+</div>
+
+<script>
+
+    function DownloadResults(res,a,b,c) {
+        debugger;
+    }
+
+function MemberAdminViewModel() {
+    // Data
+    var self = this;
+    self.types = ['All', 'Subscriber', 'FreeTrial'];
+    self.chosenTypeId = ko.observable();
+    self.chosenTypeData = ko.observable();
+    self.chosenUserData = ko.observable();
+
+    self.goToType = function(type) { location.hash = type };
+    self.goToUser = function(user) { location.hash = user.status + '/' + user.username };
+
+
+
+    // What to do when the hash changes    
+    Sammy(function () {
+
+        // The user set the type filter
+        this.get('#:type', function () {
+            self.chosenTypeId(this.params.type);
+            self.chosenUserData(null);
+            $.get("/api/users", { type: this.params.type }, self.chosenTypeData);
+        });
+
+        // The user set a username
+        this.get('#:type/:username', function() {
+            self.chosenTypeId(this.params.type);
+            $.get("/api/users/" + this.params.username, { }, self.chosenUserData);
+            self.chosenTypeData(null);
+        });
+        
+        // Default to all users
+        this.get('', function() { this.app.runRoute('get', '#All') });
+    }).run();
+};
+
+ko.applyBindings(new MemberAdminViewModel());
+</script>

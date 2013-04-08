@@ -1,0 +1,26 @@
+
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KODemo", "KnockoutJS\KODemo\KODemo.csproj", "{56C8FE5F-16FE-49D1-BCA0-33479D7F477A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KODemo.Tests", "KnockoutJS\KODemo.Tests\KODemo.Tests.csproj", "{1D9019A6-D6B0-4470-9CE2-AFF92E1F9730}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{56C8FE5F-16FE-49D1-BCA0-33479D7F477A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{56C8FE5F-16FE-49D1-BCA0-33479D7F477A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{56C8FE5F-16FE-49D1-BCA0-33479D7F477A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{56C8FE5F-16FE-49D1-BCA0-33479D7F477A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1D9019A6-D6B0-4470-9CE2-AFF92E1F9730}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1D9019A6-D6B0-4470-9CE2-AFF92E1F9730}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1D9019A6-D6B0-4470-9CE2-AFF92E1F9730}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1D9019A6-D6B0-4470-9CE2-AFF92E1F9730}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
